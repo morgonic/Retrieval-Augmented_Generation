@@ -30,72 +30,74 @@ beautifulsoup4, langchain, sentence-transformers, numpy, faiss-cpu, transformers
 - ⚠️ Content div does not contain expected article content.
 💾 Saved full HTML to debug_page.html
 
-The debug_page.html is too long to paste here
+- The debug_page.html is too long to paste here
 
 - I used this version:
 
-import requests
-from bs4 import BeautifulSoup
+    ```
+    import requests
+    from bs4 import BeautifulSoup
 
-def scrape_webpage(url):
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/115.0.0.0 Safari/537.36"
-        )
-    }
+    def scrape_webpage(url):
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/115.0.0.0 Safari/537.36"
+            )
+        }
 
-    try:
-        session = requests.Session()
-        response = session.get(url, headers=headers)
-        if response.status_code != 200:
-            print(f"❌ Failed to fetch the webpage. Status code: {response.status_code}")
+        try:
+            session = requests.Session()
+            response = session.get(url, headers=headers)
+            if response.status_code != 200:
+                print(f"❌ Failed to fetch the webpage. Status code: {response.status_code}")
+                return None
+
+            soup = BeautifulSoup(response.text, "html.parser")
+            content_div = soup.find("div", class_="mw-parser-output")
+
+            if not content_div:
+                print("❌ Could not find the main content container.")
+                return None
+
+            # Look for keyword before continuing
+            if "Rage Against the Machine" not in content_div.text:
+                print("⚠️ Content div does not contain expected article content.")
+                with open("debug_page.html", "w", encoding="utf-8") as debug_file:
+                    debug_file.write(soup.prettify())
+                print("💾 Saved full HTML to debug_page.html")
+                return None
+
+            paragraphs = content_div.find_all("p")
+            if not paragraphs:
+                print("⚠️ No &lt;p&gt; tags found inside the content container.")
+                with open("debug_page.html", "w", encoding="utf-8") as debug_file:
+                    debug_file.write(content_div.prettify())
+                print("💾 Saved partial HTML to debug_page.html")
+                return None
+
+            article_text = "\n\n".join(p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True))
+
+            with open("Selected_Document.txt", "w", encoding="utf-8") as file:
+                file.write(article_text)
+
+            print("✅ Successfully fetched and saved article.")
+            return article_text
+
+        except Exception as e:
+            print(f"⚠️ An error occurred: {e}")
             return None
 
-        soup = BeautifulSoup(response.text, "html.parser")
-        content_div = soup.find("div", class_="mw-parser-output")
+    def main():
+        url = "https://en.wikipedia.org/wiki/Punk_rock"
+        scrape_webpage(url)
 
-        if not content_div:
-            print("❌ Could not find the main content container.")
-            return None
+    if __name__ == '__main__':
+        main()
+    ```
 
-        # Look for keyword before continuing
-        if "Rage Against the Machine" not in content_div.text:
-            print("⚠️ Content div does not contain expected article content.")
-            with open("debug_page.html", "w", encoding="utf-8") as debug_file:
-                debug_file.write(soup.prettify())
-            print("💾 Saved full HTML to debug_page.html")
-            return None
-
-        paragraphs = content_div.find_all("p")
-        if not paragraphs:
-            print("⚠️ No &lt;p&gt; tags found inside the content container.")
-            with open("debug_page.html", "w", encoding="utf-8") as debug_file:
-                debug_file.write(content_div.prettify())
-            print("💾 Saved partial HTML to debug_page.html")
-            return None
-
-        article_text = "\n\n".join(p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True))
-
-        with open("Selected_Document.txt", "w", encoding="utf-8") as file:
-            file.write(article_text)
-
-        print("✅ Successfully fetched and saved article.")
-        return article_text
-
-    except Exception as e:
-        print(f"⚠️ An error occurred: {e}")
-        return None
-
-def main():
-    url = "https://en.wikipedia.org/wiki/Punk_rock"
-    scrape_webpage(url)
-
-if __name__ == '__main__':
-    main()
-
-And used a different wiki article and it worked
+- And used a different wiki article and it worked
 
 
 - The text has some words smushed together with no spaces
@@ -113,10 +115,7 @@ And used a different wiki article and it worked
 - Sometimes it has something like [ nb 6 ] or [ 6, 2, 3 ]
 
 
-- There's still stuff like this:
-
- [ nb 1 ] 
-
+- There's still stuff like this: [ nb 1 ] 
 And I like the previous version more that split it up into paragraphs.
 
 ## Step 3 Prompts
@@ -172,14 +171,14 @@ so that the user can keep asking until they type ‘exit’ or ‘quit’, and a
 
 - How come 'distances' here is never accessed?
 
-def retrieve_chunks(question, k=top_k):
+```def retrieve_chunks(question, k=top_k):
     """
     Encode the question, search the FAISS index, and return the top k relevant chunks.
     """
     query_vector = embedding_model.encode([question], show_progress_bar=False)
     query_vector = np.array(query_vector, dtype=np.float32)
     distances, indices = index.search(query_vector, k)
-    return [chunks[i] for i in indices[0] if i &lt; len(chunks)]
+    return [chunks[i] for i in indices[0] if i &lt; len(chunks)]```
 
 
 
