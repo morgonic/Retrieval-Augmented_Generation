@@ -41,7 +41,7 @@ The punk rock Wikipedia page consists of the history of punk rock, notable punk 
 - The tests that had a chunk size of 2000 and an overlap of 50-600 (42-46 chunks) produced what seemed like more confident answers but included even more hallucinations, such as when referring to "The Meteors" or giving "Punk rock" as an answer to who invented punk rock.
 - The test that had a chunk size of 1000 and an overlap of 200 (96 chunks) got some questions wrong, but performed better than the tests with 2000-size chunks.
 
-### Trends:
+## Trends:
 - The higher the chunk size, the higher the hallucinations.
 - Higher chunk overlap helps a little bit with continuity but doesn't help with accuracy or hallucinations.
 - Chunks with a size of 500-1000 and an overlap of 100-200 consistently produce better answers, seeming to have enough context for reasoning without much hallucinating.
