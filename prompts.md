@@ -7,25 +7,25 @@ beautifulsoup4, langchain, sentence-transformers, numpy, faiss-cpu, transformers
 - Generate a requirements.txt listing exactly those seven libraries (one per line).
 
 ## Step 2 Prompts
-- Write a Python function called scrape_webpage(url) that uses requests to fetch https://en.wikipedia.org/wiki/Rage_Against_the_Machine, parses it with BeautifulSoup, extracts all <p> tags inside <div class='mw-parser-output'>, joins their text with blank lines, writes the result to Selected_Document.txt (UTF‑8), prints a success/failure message based on the HTTP status code, and returns the article text. Please hard‑code the URL in the function. Also include a main() function and an if __name__ == '__main__': block that calls scrape_webpage() so the script runs when executed.
+- Write a Python function called scrape_webpage(url) that uses requests to fetch https://en.wikipedia.org/wiki/Rage_Against_the_Machine, parses it with BeautifulSoup, extracts all &lt;p&gt; tags inside &lt;div class='mw-parser-output'&gt;, joins their text with blank lines, writes the result to Selected_Document.txt (UTF‑8), prints a success/failure message based on the HTTP status code, and returns the article text. Please hard‑code the URL in the function. Also include a main() function and an if __name__ == '__main__': block that calls scrape_webpage() so the script runs when executed.
 
 ### Debugging prompts
 - It's making the document but there's no text in it
 
-- ⚠️ No <p> tags found inside the content container.
+- ⚠️ No &lt;p&gt; tags found inside the content container.
 
- - No <p> tags found inside the content container.
-<div class="mw-parser-output">
- <span typeof="mw:File">
-  <a href="/wiki/Wikipedia:Good_articles*" title="This is a good article. Click here for more information.">
-   <img alt="This is a good article. Click here for more information." class="mw-file-element" data-file-height="185" data-file-width="180" decoding="async" height="20" src="//upload.wikimedia.org/wikipedia/en/thumb/9/94/Symbol_support_vote.svg/20px-Symbol_support_vote.svg.png" srcset="//upload.wikimedia.org/wikipedia/en/thumb/9/94/Symbol_support_vote.svg/40px-Symbol_support_vote.svg.png 1.5x" width="19"/>
-  </a>
- </span>
-</div>
+ - No &lt;p&gt; tags found inside the content container.
+&lt;div class="mw-parser-output"&gt;
+ &lt;span typeof="mw:File"&gt;
+  &lt;a href="/wiki/Wikipedia:Good_articles*" title="This is a good article. Click here for more information."&gt;
+   &lt;img alt="This is a good article. Click here for more information." class="mw-file-element" data-file-height="185" data-file-width="180" decoding="async" height="20" src="//upload.wikimedia.org/wikipedia/en/thumb/9/94/Symbol_support_vote.svg/20px-Symbol_support_vote.svg.png" srcset="//upload.wikimedia.org/wikipedia/en/thumb/9/94/Symbol_support_vote.svg/40px-Symbol_support_vote.svg.png 1.5x" width="19"/&gt;
+  &lt;/a&gt;
+ &lt;/span&gt;
+&lt;/div&gt;
 
 - It's supposed to be scrape_webpage(url)
 
-- ⚠️ No <p> tags found inside the content container.
+- ⚠️ No &lt;p&gt; tags found inside the content container.
 
 - ⚠️ Content div does not contain expected article content.
 💾 Saved full HTML to debug_page.html
@@ -70,7 +70,7 @@ def scrape_webpage(url):
 
         paragraphs = content_div.find_all("p")
         if not paragraphs:
-            print("⚠️ No <p> tags found inside the content container.")
+            print("⚠️ No &lt;p&gt; tags found inside the content container.")
             with open("debug_page.html", "w", encoding="utf-8") as debug_file:
                 debug_file.write(content_div.prettify())
             print("💾 Saved partial HTML to debug_page.html")
@@ -179,7 +179,7 @@ def retrieve_chunks(question, k=top_k):
     query_vector = embedding_model.encode([question], show_progress_bar=False)
     query_vector = np.array(query_vector, dtype=np.float32)
     distances, indices = index.search(query_vector, k)
-    return [chunks[i] for i in indices[0] if i < len(chunks)]
+    return [chunks[i] for i in indices[0] if i &lt; len(chunks)]
 
 
 
@@ -190,7 +190,7 @@ Type your questions below. Type 'exit' or 'quit' to stop.
 
 Your question: What is punk rock?
 Traceback (most recent call last):
-  File "/mnt/c/Users/Morgon/Documents/Full Sail/AI Ecosystem/Retrieval-Augmented_Generation/RAG_app.py", line 106, in <module>
+  File "/mnt/c/Users/Morgon/Documents/Full Sail/AI Ecosystem/Retrieval-Augmented_Generation/RAG_app.py", line 106, in &lt;module&gt;
     answer = answer_question(question)
              ^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/mnt/c/Users/Morgon/Documents/Full Sail/AI Ecosystem/Retrieval-Augmented_Generation/RAG_app.py", line 93, in answer_question
