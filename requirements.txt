@@ -1,0 +1,7 @@
+beautifulsoup4
+langchain
+sentence-transformers
+numpy
+faiss-cpu
+transformers
+torch

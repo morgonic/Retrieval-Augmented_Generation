@@ -1,0 +1,25 @@
+# Ignore the virtual environment folder
+venv/
+.venv/
+
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Editor/IDE configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS / Linux / Windows system files
+.DS_Store
+Thumbs.db
+
+# Environment variable files
+.env
+*.env
+
+# Logs
+*.log
