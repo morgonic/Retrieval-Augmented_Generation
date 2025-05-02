@@ -6,7 +6,7 @@ The punk rock Wikipedia page consists of the history of punk rock, notable punk 
 
 ---
 
-## Questions & Answers
+# Questions & Answers
 1. **Why does the embedding dimensionality matter in a RAG pipeline, and how is it determined?**
     - Embedding dimensionality determines the vector space in which semantic similarity is measured. In FAISS, all vectors in the index must have the same fixed dimension — it defines the geometry of comparison. The dimensionality is determined by the embedding model (e.g., all-distilroberta-v1 outputs 768-dimensional vectors). A mismatch between the embedding size and the FAISS index will trigger errors or degrade retrieval quality. Higher dimensions allow for richer semantic representation, but may increase computational cost and memory usage.
 
