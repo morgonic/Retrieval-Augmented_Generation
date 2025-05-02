@@ -39,7 +39,7 @@ The punk rock Wikipedia page consists of the history of punk rock, notable punk 
 # Suggestions for Improvements or Extensions
 1. **Prompt engineering**
     - Add strong constraints to the prompt like "use only the following context".
-    - The prompt to create *answer_question()* says "build prompt with context", but perhaps could benefit from stronger and more intentional language so the prompt the AI tool produces to feed to the generator model preserves the importance of sticking to the context, rather than just "considering" the context.
+    - The prompt to create *answer_question()* says "build prompt with context", but perhaps could benefit from stronger and more intentional language so the prompt the AI tool produces to feed to the generator model preserves the importance of sticking to the context, rather than just "considering" the context or giving responses "based" on the context.
 2. **Use a larger generator model**
     - Use a more powerful text generation model, like flan-t5-base or flan-t5-large, to potentially reduce hallucinations.
 3. **Implement multi-document RAG**
