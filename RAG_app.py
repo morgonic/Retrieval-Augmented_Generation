@@ -16,7 +16,7 @@ warnings.filterwarnings("ignore")
 
 # --- Configuration Variables ---
 chunk_size = 1000
-chunk_overlap = 200
+chunk_overlap = 100
 model_name = "sentence-transformers/all-distilroberta-v1"
 top_k = 5
 

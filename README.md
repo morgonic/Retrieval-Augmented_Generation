@@ -326,3 +326,27 @@ Your question: Who coined the term punk rock
 - The higher the chunk size, the higher the hallucinations.
 - Higher chunk overlap helps a little bit with continuity but doesn't help with accuracy or hallucinations.
 - Chunks with a size of 500-1000 and an overlap of 100-200 consistently produce better answers, seeming to have enough context for reasoning without much hallucinating.
+
+---
+
+## Questions & Answers
+1. Why does the embedding dimensionality matter in a RAG pipeline, and how is it determined?
+    - Embedding dimensionality determines the vector space in which semantic similarity is measured. In FAISS, all vectors in the index must have the same fixed dimension — it defines the geometry of comparison. The dimensionality is determined by the embedding model (e.g., all-distilroberta-v1 outputs 768-dimensional vectors). A mismatch between the embedding size and the FAISS index will trigger errors or degrade retrieval quality. Higher dimensions allow for richer semantic representation, but may increase computational cost and memory usage.
+2. How does FAISS's IndexFlatL2 perform similarity search, and why use it over other indexes?
+    - IndexFlatL2 performs an exact search using Euclidean (L2) distance. It computes the distance between the query vector and all vectors in the index and returns the top k closest matches. It's simple and accurate, ideal for small to medium-sized datasets where speed isn't a bottleneck. In contrast, for larger-scale retrieval (e.g. millions of vectors), approximate methods like IndexIVFFlat or HNSW are preferred for faster retrieval at the cost of some accuracy.
+3. How does chunk overlap improve context quality, and when can it backfire?
+    - Chunk overlap (e.g. 10–20% of chunk size) helps preserve continuity of ideas that span across boundaries — especially useful when a sentence or paragraph splits mid-thought. This improves recall and reduces semantic fragmentation.
+    However, high overlap increases index size and may introduce redundant information, causing retrieval of near-duplicate chunks. This can confuse the generator (e.g., when it receives the same fact twice in slightly different wording) and bloat memory usage.
+4. How should prompts be designed in the generator to reduce hallucinations and improve groundedness?
+    - Good prompt design in RAG provides clear instruction, structured context, and scope.
+    - For example:
+        - "Answer the question based only on the following context:\n\n{context}\n\nQuestion: {question}\nAnswer:"
+    - Key tips:
+        - Use the phrase "based only on the following context" to restrict model behavior.
+        - Keep context under token limits (e.g., < 1024 tokens for T5-small).
+        - Avoid ambiguous wording -- the more literal the prompt, the better small models perform.
+    - Advanced techniques like few-shot examples, separators, or tag-based formats (e.g., <context>...</context>) can further improve control.
+5. What are the trade-offs between small vs large embedding models in terms of RAG performance?
+    - Small models (like all-MiniLM or distilroberta) are fast, lightweight, and perform reasonably well for general semantic similarity. They're ideal for low-resource or real-time applications.
+    - Large models (like multi-qa-mpnet-base or e5-large) produce more precise embeddings, especially for complex queries or technical content — but require more memory and compute.
+    - In RAG systems, larger embedding models generally yield better retrieval quality, which improves generation accuracy — but only if the generator is strong enough to take advantage of that precision.
