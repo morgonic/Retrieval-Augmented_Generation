@@ -20,7 +20,11 @@ The punk rock Wikipedia page consists of the history of punk rock, notable punk 
 4. **How should prompts be designed in the generator to reduce hallucinations and improve groundedness?**
     - Good prompt design in RAG provides clear instruction, structured context, and scope.
     - For example:
-        - "Answer the question based only on the following context:\n\n{context}\n\nQuestion: {question}\nAnswer:"
+        - "Answer the question based only on the following context:
+        ```
+        \n\n{context}\n\nQuestion: {question}\nAnswer:
+        ```
+        "
     - Key tips:
         - Use the phrase "based only on the following context" to restrict model behavior.
         - Keep context under token limits (e.g., < 1024 tokens for T5-small).
@@ -31,6 +35,15 @@ The punk rock Wikipedia page consists of the history of punk rock, notable punk 
     - Small models (like all-MiniLM or distilroberta) are fast, lightweight, and perform reasonably well for general semantic similarity. They're ideal for low-resource or real-time applications.
     - Large models (like multi-qa-mpnet-base or e5-large) produce more precise embeddings, especially for complex queries or technical content — but require more memory and compute.
     - In RAG systems, larger embedding models generally yield better retrieval quality, which improves generation accuracy — but only if the generator is strong enough to take advantage of that precision.
+
+# Suggestions for Improvements or Extensions
+1. **Prompt engineering**
+    - Add strong constraints to the prompt like "use only the following context".
+    - The prompt to create *answer_question()* says "build prompt with context", but perhaps could benefit from stronger and more intentional language so the prompt the AI tool produces to feed to the generator model preserves the importance of sticking to the context, rather than just "considering" the context.
+2. **Use a larger generator model**
+    - Use a more powerful text generation model, like flan-t5-base or flan-t5-large, to potentially reduce hallucinations.
+3. **Implement multi-document RAG**
+    - Instead of prompting to only use one selected document, being able to use multiple documents as a directory of sources could result in more accurate or robust responses, giving the generator model even more context to base its responses on.
 
 # Conclusions and Trends Observed in Testing
 

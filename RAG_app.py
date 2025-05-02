@@ -1,11 +1,11 @@
 import os
 import logging
 import warnings
-import numpy as np
-import faiss
+import numpy as np # type: ignore
+import faiss # type: ignore
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
+from langchain.text_splitter import RecursiveCharacterTextSplitter # type: ignore
+from sentence_transformers import SentenceTransformer # type: ignore
 from transformers import pipeline, logging as hf_logging
 
 # --- Logging & Warning Suppression ---
