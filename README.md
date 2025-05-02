@@ -1,6 +1,6 @@
-***Reflection***
+# Reflection
 
-**Test 1**
+## Test 1
 - Chunk size: 500
 - Chunk overlap: 50
 
@@ -45,7 +45,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: Lester Bangs
 
-**Test 2**
+## Test 2
 - Chunk size: 1000
 - Chunk overlap: 100
 
@@ -88,7 +88,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Test 3**
+## Test 3
 - Chunk size: 1000
 - Chunk overlap: 50
 
@@ -131,7 +131,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Test 4**
+## Test 4
 - Chunk size: 2000
 - Chunk overlap: 50
 
@@ -174,7 +174,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Test 5**
+## Test 5
 - Chunk size: 2000
 - Chunk overlap: 200
 
@@ -217,7 +217,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Test 6**
+## Test 6
 - Chunk size: 2000
 - Chunk overlap: 600
 
@@ -260,7 +260,7 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Test 7**
+## Test 7
 - Chunk size: 1000
 - Chunk overlap: 200
 
