@@ -171,14 +171,16 @@ so that the user can keep asking until they type ‘exit’ or ‘quit’, and a
 
 - How come 'distances' here is never accessed?
 
-```def retrieve_chunks(question, k=top_k):
+```
+def retrieve_chunks(question, k=top_k):
     """
     Encode the question, search the FAISS index, and return the top k relevant chunks.
     """
     query_vector = embedding_model.encode([question], show_progress_bar=False)
     query_vector = np.array(query_vector, dtype=np.float32)
     distances, indices = index.search(query_vector, k)
-    return [chunks[i] for i in indices[0] if i &lt; len(chunks)]```
+    return [chunks[i] for i in indices[0] if i &lt; len(chunks)]
+```
 
 
 
