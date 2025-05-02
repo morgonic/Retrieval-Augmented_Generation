@@ -4,7 +4,7 @@
 - Chunk size: 500
 - Chunk overlap: 50
 
-*Output:*
+***Output:***
 
 🔪 Splitting text into chunks...
 🧩 178 chunks created.
@@ -49,6 +49,8 @@ Your question: Who coined the term punk rock
 - Chunk size: 1000
 - Chunk overlap: 100
 
+***Output:***
+
 🔪 Splitting text into chunks...
 🧩 94 chunks created.
 🔍 Loading embedding model...
@@ -91,6 +93,8 @@ Your question: Who coined the term punk rock
 ## Test 3
 - Chunk size: 1000
 - Chunk overlap: 50
+
+***Output:***
 
 🔪 Splitting text into chunks...
 🧩 94 chunks created.
@@ -135,6 +139,8 @@ Your question: Who coined the term punk rock
 - Chunk size: 2000
 - Chunk overlap: 50
 
+***Output:***
+
 🔪 Splitting text into chunks...
 🧩 42 chunks created.
 🔍 Loading embedding model...
@@ -177,6 +183,8 @@ Your question: Who coined the term punk rock
 ## Test 5
 - Chunk size: 2000
 - Chunk overlap: 200
+
+***Output:***
 
 🔪 Splitting text into chunks...
 🧩 42 chunks created.
@@ -221,6 +229,8 @@ Your question: Who coined the term punk rock
 - Chunk size: 2000
 - Chunk overlap: 600
 
+***Output:***
+
 🔪 Splitting text into chunks...
 🧩 46 chunks created.
 🔍 Loading embedding model...
@@ -264,6 +274,8 @@ Your question: Who coined the term punk rock
 - Chunk size: 1000
 - Chunk overlap: 200
 
+***Output:***
+
 🔪 Splitting text into chunks...
 🧩 96 chunks created.
 🔍 Loading embedding model...
@@ -303,14 +315,14 @@ Your question: Who coined the term punk rock
 
 📎 Answer: American rock critics
 
-**Conclusion:**
+## Conclusion:
 - Chunk size and chunk overlap do affect the accuracy and quality of the answers. 
 - The first test, using chunk size 500 and an overlap of 50 (178 chunks), produced the best factual accuracy, like designating Lester Bangs as the man to coin the term 'punk rock', but sometimes had shallow information, as if context were cut off.
 - The tests that had a chunk size of 1000 and an overlap of 50-100 (94 chunks) produced balanced answers but did hallucinate answers (for example, when referencing Ed Sanders and X-Ray Spex).
 - The tests that had a chunk size of 2000 and an overlap of 50-600 (42-46 chunks) produced what seemed like more confident answers but included even more hallucinations, such as when referring to "The Meteors" or giving "Punk rock" as an answer to who invented punk rock.
 - The test that had a chunk size of 1000 and an overlap of 200 (96 chunks) got some questions wrong, but performed better than the tests with 2000-size chunks.
 
-**Trends:**
+### Trends:
 - The higher the chunk size, the higher the hallucinations.
 - Higher chunk overlap helps a little bit with continuity but doesn't help with accuracy or hallucinations.
 - Chunks with a size of 500-1000 and an overlap of 100-200 consistently produce better answers, seeming to have enough context for reasoning without much hallucinating.
